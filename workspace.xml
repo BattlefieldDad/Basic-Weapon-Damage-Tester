@@ -426,20 +426,20 @@
                 </statement>
                 <next>
                   <block type="ruleBlock">
-                    <mutation isOnGoingEvent="true"></mutation>
-                    <field name="NAME">displayOptionText</field>
-                    <field name="EVENTTYPE">Ongoing</field>
-                    <field name="OBJECTTYPE">Global</field>
+                    <mutation isOnGoingEvent="false"></mutation>
+                    <field name="NAME">spawnInfrontOfPlayer</field>
+                    <field name="EVENTTYPE">OnPlayerDeployed</field>
                     <statement name="CONDITIONS">
                       <block type="conditionBlock">
                         <value name="CONDITION">
-                          <block type="GreaterThan">
+                          <block type="GetSoldierState">
                             <value name="VALUE-0">
-                              <block type="GetMatchTimeElapsed"></block>
+                              <block type="EventPlayer"></block>
                             </value>
                             <value name="VALUE-1">
-                              <block type="Number">
-                                <field name="NUM">0</field>
+                              <block type="SoldierStateBoolItem">
+                                <field name="VALUE-0">SoldierStateBool</field>
+                                <field name="VALUE-1">IsAISoldier</field>
                               </block>
                             </value>
                           </block>
@@ -448,53 +448,153 @@
                     </statement>
                     <statement name="ACTIONS">
                       <block type="subroutineInstanceBlock">
-                        <field name="SUBROUTINE_NAME">displayOptionText</field>
+                        <field name="SUBROUTINE_NAME">moveToPlayer</field>
                       </block>
                     </statement>
                     <next>
                       <block type="ruleBlock">
                         <mutation isOnGoingEvent="true"></mutation>
-                        <field name="NAME">doubleTapToLock</field>
+                        <field name="NAME">displayOptionText</field>
                         <field name="EVENTTYPE">Ongoing</field>
-                        <field name="OBJECTTYPE">Player</field>
+                        <field name="OBJECTTYPE">Global</field>
                         <statement name="CONDITIONS">
                           <block type="conditionBlock">
                             <value name="CONDITION">
-                              <block type="GetSoldierState">
+                              <block type="GreaterThan">
                                 <value name="VALUE-0">
-                                  <block type="EventPlayer"></block>
+                                  <block type="GetMatchTimeElapsed"></block>
                                 </value>
                                 <value name="VALUE-1">
-                                  <block type="SoldierStateBoolItem">
-                                    <field name="VALUE-0">SoldierStateBool</field>
-                                    <field name="VALUE-1">IsAlive</field>
+                                  <block type="Number">
+                                    <field name="NUM">0</field>
                                   </block>
                                 </value>
                               </block>
                             </value>
-                            <next>
+                          </block>
+                        </statement>
+                        <statement name="ACTIONS">
+                          <block type="subroutineInstanceBlock">
+                            <field name="SUBROUTINE_NAME">displayOptionText</field>
+                          </block>
+                        </statement>
+                        <next>
+                          <block type="ruleBlock">
+                            <mutation isOnGoingEvent="true"></mutation>
+                            <field name="NAME">doubleTapToLock</field>
+                            <field name="EVENTTYPE">Ongoing</field>
+                            <field name="OBJECTTYPE">Player</field>
+                            <statement name="CONDITIONS">
                               <block type="conditionBlock">
                                 <value name="CONDITION">
-                                  <block type="GreaterThan">
+                                  <block type="GetSoldierState">
+                                    <value name="VALUE-0">
+                                      <block type="EventPlayer"></block>
+                                    </value>
+                                    <value name="VALUE-1">
+                                      <block type="SoldierStateBoolItem">
+                                        <field name="VALUE-0">SoldierStateBool</field>
+                                        <field name="VALUE-1">IsAlive</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="conditionBlock">
+                                    <value name="CONDITION">
+                                      <block type="GreaterThan">
+                                        <value name="VALUE-0">
+                                          <block type="GetVariable">
+                                            <value name="VALUE-0">
+                                              <block type="variableReferenceBlock">
+                                                <mutation isObjectVar="false"></mutation>
+                                                <field name="OBJECTTYPE">Global</field>
+                                                <field name="VAR" id="S@W76l(0,C0~#.n#Ss[+" variabletype="Global">lockCounter</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                        <value name="VALUE-1">
+                                          <block type="Number">
+                                            <field name="NUM">0</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                    <next>
+                                      <block type="conditionBlock">
+                                        <value name="CONDITION">
+                                          <block type="GetSoldierState">
+                                            <value name="VALUE-0">
+                                              <block type="EventPlayer"></block>
+                                            </value>
+                                            <value name="VALUE-1">
+                                              <block type="SoldierStateBoolItem">
+                                                <field name="VALUE-0">SoldierStateBool</field>
+                                                <field name="VALUE-1">IsInteracting</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                        <next>
+                                          <block type="conditionBlock">
+                                            <value name="CONDITION">
+                                              <block type="Not">
+                                                <value name="VALUE-0">
+                                                  <block type="GetSoldierState">
+                                                    <value name="VALUE-0">
+                                                      <block type="EventPlayer"></block>
+                                                    </value>
+                                                    <value name="VALUE-1">
+                                                      <block type="SoldierStateBoolItem">
+                                                        <field name="VALUE-0">SoldierStateBool</field>
+                                                        <field name="VALUE-1">IsAISoldier</field>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </statement>
+                            <statement name="ACTIONS">
+                              <block type="SetVariable">
+                                <value name="VALUE-0">
+                                  <block type="variableReferenceBlock">
+                                    <mutation isObjectVar="false"></mutation>
+                                    <field name="OBJECTTYPE">Global</field>
+                                    <field name="VAR" id="X1DTV8A%D1ioO4yF+5is" variabletype="Global">lockAI</field>
+                                  </block>
+                                </value>
+                                <value name="VALUE-1">
+                                  <block type="Not">
                                     <value name="VALUE-0">
                                       <block type="GetVariable">
                                         <value name="VALUE-0">
                                           <block type="variableReferenceBlock">
                                             <mutation isObjectVar="false"></mutation>
                                             <field name="OBJECTTYPE">Global</field>
-                                            <field name="VAR" id="S@W76l(0,C0~#.n#Ss[+" variabletype="Global">lockCounter</field>
+                                            <field name="VAR" id="X1DTV8A%D1ioO4yF+5is" variabletype="Global">lockAI</field>
                                           </block>
                                         </value>
                                       </block>
                                     </value>
-                                    <value name="VALUE-1">
-                                      <block type="Number">
-                                        <field name="NUM">0</field>
-                                      </block>
-                                    </value>
                                   </block>
                                 </value>
-                                <next>
+                              </block>
+                            </statement>
+                            <next>
+                              <block type="ruleBlock">
+                                <mutation isOnGoingEvent="false"></mutation>
+                                <field name="NAME">IDAISoldierOnDeploy</field>
+                                <field name="EVENTTYPE">OnPlayerDeployed</field>
+                                <statement name="CONDITIONS">
                                   <block type="conditionBlock">
                                     <value name="CONDITION">
                                       <block type="GetSoldierState">
@@ -504,12 +604,33 @@
                                         <value name="VALUE-1">
                                           <block type="SoldierStateBoolItem">
                                             <field name="VALUE-0">SoldierStateBool</field>
-                                            <field name="VALUE-1">IsInteracting</field>
+                                            <field name="VALUE-1">IsAISoldier</field>
                                           </block>
                                         </value>
                                       </block>
                                     </value>
-                                    <next>
+                                  </block>
+                                </statement>
+                                <statement name="ACTIONS">
+                                  <block type="SetVariable">
+                                    <value name="VALUE-0">
+                                      <block type="variableReferenceBlock">
+                                        <mutation isObjectVar="false"></mutation>
+                                        <field name="OBJECTTYPE">Global</field>
+                                        <field name="VAR" id="0_O(g%eBcZUSjf1bvT0v" variabletype="Global">AIDummy</field>
+                                      </block>
+                                    </value>
+                                    <value name="VALUE-1">
+                                      <block type="EventPlayer"></block>
+                                    </value>
+                                  </block>
+                                </statement>
+                                <next>
+                                  <block type="ruleBlock">
+                                    <mutation isOnGoingEvent="false"></mutation>
+                                    <field name="NAME">IDHumanSoldierOnDeploy</field>
+                                    <field name="EVENTTYPE">OnPlayerDeployed</field>
+                                    <statement name="CONDITIONS">
                                       <block type="conditionBlock">
                                         <value name="CONDITION">
                                           <block type="Not">
@@ -529,148 +650,26 @@
                                           </block>
                                         </value>
                                       </block>
-                                    </next>
-                                  </block>
-                                </next>
-                              </block>
-                            </next>
-                          </block>
-                        </statement>
-                        <statement name="ACTIONS">
-                          <block type="SetVariable">
-                            <value name="VALUE-0">
-                              <block type="variableReferenceBlock">
-                                <mutation isObjectVar="false"></mutation>
-                                <field name="OBJECTTYPE">Global</field>
-                                <field name="VAR" id="X1DTV8A%D1ioO4yF+5is" variabletype="Global">lockAI</field>
-                              </block>
-                            </value>
-                            <value name="VALUE-1">
-                              <block type="Not">
-                                <value name="VALUE-0">
-                                  <block type="GetVariable">
-                                    <value name="VALUE-0">
-                                      <block type="variableReferenceBlock">
-                                        <mutation isObjectVar="false"></mutation>
-                                        <field name="OBJECTTYPE">Global</field>
-                                        <field name="VAR" id="X1DTV8A%D1ioO4yF+5is" variabletype="Global">lockAI</field>
-                                      </block>
-                                    </value>
-                                  </block>
-                                </value>
-                              </block>
-                            </value>
-                          </block>
-                        </statement>
-                        <next>
-                          <block type="ruleBlock">
-                            <mutation isOnGoingEvent="false"></mutation>
-                            <field name="NAME">IDAISoldierOnDeploy</field>
-                            <field name="EVENTTYPE">OnPlayerDeployed</field>
-                            <statement name="CONDITIONS">
-                              <block type="conditionBlock">
-                                <value name="CONDITION">
-                                  <block type="GetSoldierState">
-                                    <value name="VALUE-0">
-                                      <block type="EventPlayer"></block>
-                                    </value>
-                                    <value name="VALUE-1">
-                                      <block type="SoldierStateBoolItem">
-                                        <field name="VALUE-0">SoldierStateBool</field>
-                                        <field name="VALUE-1">IsAISoldier</field>
-                                      </block>
-                                    </value>
-                                  </block>
-                                </value>
-                              </block>
-                            </statement>
-                            <statement name="ACTIONS">
-                              <block type="SetVariable">
-                                <value name="VALUE-0">
-                                  <block type="variableReferenceBlock">
-                                    <mutation isObjectVar="false"></mutation>
-                                    <field name="OBJECTTYPE">Global</field>
-                                    <field name="VAR" id="0_O(g%eBcZUSjf1bvT0v" variabletype="Global">AIDummy</field>
-                                  </block>
-                                </value>
-                                <value name="VALUE-1">
-                                  <block type="EventPlayer"></block>
-                                </value>
-                              </block>
-                            </statement>
-                            <next>
-                              <block type="ruleBlock">
-                                <mutation isOnGoingEvent="false"></mutation>
-                                <field name="NAME">IDHumanSoldierOnDeploy</field>
-                                <field name="EVENTTYPE">OnPlayerDeployed</field>
-                                <statement name="CONDITIONS">
-                                  <block type="conditionBlock">
-                                    <value name="CONDITION">
-                                      <block type="Not">
-                                        <value name="VALUE-0">
-                                          <block type="GetSoldierState">
-                                            <value name="VALUE-0">
-                                              <block type="EventPlayer"></block>
-                                            </value>
-                                            <value name="VALUE-1">
-                                              <block type="SoldierStateBoolItem">
-                                                <field name="VALUE-0">SoldierStateBool</field>
-                                                <field name="VALUE-1">IsAISoldier</field>
-                                              </block>
-                                            </value>
-                                          </block>
-                                        </value>
-                                      </block>
-                                    </value>
-                                  </block>
-                                </statement>
-                                <statement name="ACTIONS">
-                                  <block type="SetVariable">
-                                    <value name="VALUE-0">
-                                      <block type="variableReferenceBlock">
-                                        <mutation isObjectVar="false"></mutation>
-                                        <field name="OBJECTTYPE">Global</field>
-                                        <field name="VAR" id="d?U`n}qKFuiMEOh:pF$K" variabletype="Global">humanPlayer</field>
-                                      </block>
-                                    </value>
-                                    <value name="VALUE-1">
-                                      <block type="EventPlayer"></block>
-                                    </value>
-                                  </block>
-                                </statement>
-                                <next>
-                                  <block type="ruleBlock">
-                                    <mutation isOnGoingEvent="false"></mutation>
-                                    <field name="NAME">disableAiDummy</field>
-                                    <field name="EVENTTYPE">OnPlayerDeployed</field>
-                                    <statement name="CONDITIONS">
-                                      <block type="conditionBlock">
-                                        <value name="CONDITION">
-                                          <block type="GetSoldierState">
-                                            <value name="VALUE-0">
-                                              <block type="EventPlayer"></block>
-                                            </value>
-                                            <value name="VALUE-1">
-                                              <block type="SoldierStateBoolItem">
-                                                <field name="VALUE-0">SoldierStateBool</field>
-                                                <field name="VALUE-1">IsAISoldier</field>
-                                              </block>
-                                            </value>
-                                          </block>
-                                        </value>
-                                      </block>
                                     </statement>
                                     <statement name="ACTIONS">
-                                      <block type="subroutineInstanceBlock">
-                                        <field name="SUBROUTINE_NAME">disableBot</field>
+                                      <block type="SetVariable">
+                                        <value name="VALUE-0">
+                                          <block type="variableReferenceBlock">
+                                            <mutation isObjectVar="false"></mutation>
+                                            <field name="OBJECTTYPE">Global</field>
+                                            <field name="VAR" id="d?U`n}qKFuiMEOh:pF$K" variabletype="Global">humanPlayer</field>
+                                          </block>
+                                        </value>
+                                        <value name="VALUE-1">
+                                          <block type="EventPlayer"></block>
+                                        </value>
                                       </block>
                                     </statement>
                                     <next>
                                       <block type="ruleBlock">
-                                        <mutation isOnGoingEvent="true"></mutation>
-                                        <field name="NAME">startLockCounter</field>
-                                        <field name="EVENTTYPE">Ongoing</field>
-                                        <field name="OBJECTTYPE">Player</field>
+                                        <mutation isOnGoingEvent="false"></mutation>
+                                        <field name="NAME">disableAiDummy</field>
+                                        <field name="EVENTTYPE">OnPlayerDeployed</field>
                                         <statement name="CONDITIONS">
                                           <block type="conditionBlock">
                                             <value name="CONDITION">
@@ -681,114 +680,22 @@
                                                 <value name="VALUE-1">
                                                   <block type="SoldierStateBoolItem">
                                                     <field name="VALUE-0">SoldierStateBool</field>
-                                                    <field name="VALUE-1">IsAlive</field>
+                                                    <field name="VALUE-1">IsAISoldier</field>
                                                   </block>
                                                 </value>
                                               </block>
                                             </value>
-                                            <next>
-                                              <block type="conditionBlock">
-                                                <value name="CONDITION">
-                                                  <block type="Equals">
-                                                    <value name="VALUE-0">
-                                                      <block type="GetVariable">
-                                                        <value name="VALUE-0">
-                                                          <block type="variableReferenceBlock">
-                                                            <mutation isObjectVar="false"></mutation>
-                                                            <field name="OBJECTTYPE">Global</field>
-                                                            <field name="VAR" id="S@W76l(0,C0~#.n#Ss[+" variabletype="Global">lockCounter</field>
-                                                          </block>
-                                                        </value>
-                                                      </block>
-                                                    </value>
-                                                    <value name="VALUE-1">
-                                                      <block type="Number">
-                                                        <field name="NUM">0</field>
-                                                      </block>
-                                                    </value>
-                                                  </block>
-                                                </value>
-                                                <next>
-                                                  <block type="conditionBlock">
-                                                    <value name="CONDITION">
-                                                      <block type="GetSoldierState">
-                                                        <value name="VALUE-0">
-                                                          <block type="EventPlayer"></block>
-                                                        </value>
-                                                        <value name="VALUE-1">
-                                                          <block type="SoldierStateBoolItem">
-                                                            <field name="VALUE-0">SoldierStateBool</field>
-                                                            <field name="VALUE-1">IsInteracting</field>
-                                                          </block>
-                                                        </value>
-                                                      </block>
-                                                    </value>
-                                                    <next>
-                                                      <block type="conditionBlock">
-                                                        <value name="CONDITION">
-                                                          <block type="Not">
-                                                            <value name="VALUE-0">
-                                                              <block type="GetSoldierState">
-                                                                <value name="VALUE-0">
-                                                                  <block type="EventPlayer"></block>
-                                                                </value>
-                                                                <value name="VALUE-1">
-                                                                  <block type="SoldierStateBoolItem">
-                                                                    <field name="VALUE-0">SoldierStateBool</field>
-                                                                    <field name="VALUE-1">IsAISoldier</field>
-                                                                  </block>
-                                                                </value>
-                                                              </block>
-                                                            </value>
-                                                          </block>
-                                                        </value>
-                                                      </block>
-                                                    </next>
-                                                  </block>
-                                                </next>
-                                              </block>
-                                            </next>
                                           </block>
                                         </statement>
                                         <statement name="ACTIONS">
-                                          <block type="ForVariable">
-                                            <value name="VALUE-0">
-                                              <block type="variableReferenceBlock">
-                                                <mutation isObjectVar="false"></mutation>
-                                                <field name="OBJECTTYPE">Global</field>
-                                                <field name="VAR" id="S@W76l(0,C0~#.n#Ss[+" variabletype="Global">lockCounter</field>
-                                              </block>
-                                            </value>
-                                            <value name="VALUE-1">
-                                              <block type="Number">
-                                                <field name="NUM">1</field>
-                                              </block>
-                                            </value>
-                                            <value name="VALUE-2">
-                                              <block type="Number">
-                                                <field name="NUM">0</field>
-                                              </block>
-                                            </value>
-                                            <value name="VALUE-3">
-                                              <block type="Number">
-                                                <field name="NUM">-1</field>
-                                              </block>
-                                            </value>
-                                            <statement name="DO">
-                                              <block type="Wait">
-                                                <value name="VALUE-0">
-                                                  <block type="Number">
-                                                    <field name="NUM">1</field>
-                                                  </block>
-                                                </value>
-                                              </block>
-                                            </statement>
+                                          <block type="subroutineInstanceBlock">
+                                            <field name="SUBROUTINE_NAME">disableBot</field>
                                           </block>
                                         </statement>
                                         <next>
                                           <block type="ruleBlock">
                                             <mutation isOnGoingEvent="true"></mutation>
-                                            <field name="NAME">keepAIInOnePlaceIfLocked</field>
+                                            <field name="NAME">startLockCounter</field>
                                             <field name="EVENTTYPE">Ongoing</field>
                                             <field name="OBJECTTYPE">Player</field>
                                             <statement name="CONDITIONS">
@@ -809,59 +716,21 @@
                                                 <next>
                                                   <block type="conditionBlock">
                                                     <value name="CONDITION">
-                                                      <block type="GetSoldierState">
+                                                      <block type="Equals">
                                                         <value name="VALUE-0">
-                                                          <block type="EventPlayer"></block>
-                                                        </value>
-                                                        <value name="VALUE-1">
-                                                          <block type="SoldierStateBoolItem">
-                                                            <field name="VALUE-0">SoldierStateBool</field>
-                                                            <field name="VALUE-1">IsAISoldier</field>
-                                                          </block>
-                                                        </value>
-                                                      </block>
-                                                    </value>
-                                                    <next>
-                                                      <block type="conditionBlock">
-                                                        <value name="CONDITION">
                                                           <block type="GetVariable">
                                                             <value name="VALUE-0">
                                                               <block type="variableReferenceBlock">
                                                                 <mutation isObjectVar="false"></mutation>
                                                                 <field name="OBJECTTYPE">Global</field>
-                                                                <field name="VAR" id="X1DTV8A%D1ioO4yF+5is" variabletype="Global">lockAI</field>
+                                                                <field name="VAR" id="S@W76l(0,C0~#.n#Ss[+" variabletype="Global">lockCounter</field>
                                                               </block>
                                                             </value>
                                                           </block>
                                                         </value>
-                                                      </block>
-                                                    </next>
-                                                  </block>
-                                                </next>
-                                              </block>
-                                            </statement>
-                                            <statement name="ACTIONS">
-                                              <block type="subroutineInstanceBlock">
-                                                <field name="SUBROUTINE_NAME">lockBotInPlace</field>
-                                              </block>
-                                            </statement>
-                                            <next>
-                                              <block type="ruleBlock">
-                                                <mutation isOnGoingEvent="true"></mutation>
-                                                <field name="NAME">moveBotOnInterect</field>
-                                                <field name="EVENTTYPE">Ongoing</field>
-                                                <field name="OBJECTTYPE">Player</field>
-                                                <statement name="CONDITIONS">
-                                                  <block type="conditionBlock">
-                                                    <value name="CONDITION">
-                                                      <block type="GetSoldierState">
-                                                        <value name="VALUE-0">
-                                                          <block type="EventPlayer"></block>
-                                                        </value>
                                                         <value name="VALUE-1">
-                                                          <block type="SoldierStateBoolItem">
-                                                            <field name="VALUE-0">SoldierStateBool</field>
-                                                            <field name="VALUE-1">IsAlive</field>
+                                                          <block type="Number">
+                                                            <field name="NUM">0</field>
                                                           </block>
                                                         </value>
                                                       </block>
@@ -905,113 +774,76 @@
                                                       </block>
                                                     </next>
                                                   </block>
-                                                </statement>
-                                                <statement name="ACTIONS">
-                                                  <block type="SetHeal">
+                                                </next>
+                                              </block>
+                                            </statement>
+                                            <statement name="ACTIONS">
+                                              <block type="ForVariable">
+                                                <value name="VALUE-0">
+                                                  <block type="variableReferenceBlock">
+                                                    <mutation isObjectVar="false"></mutation>
+                                                    <field name="OBJECTTYPE">Global</field>
+                                                    <field name="VAR" id="S@W76l(0,C0~#.n#Ss[+" variabletype="Global">lockCounter</field>
+                                                  </block>
+                                                </value>
+                                                <value name="VALUE-1">
+                                                  <block type="Number">
+                                                    <field name="NUM">1</field>
+                                                  </block>
+                                                </value>
+                                                <value name="VALUE-2">
+                                                  <block type="Number">
+                                                    <field name="NUM">0</field>
+                                                  </block>
+                                                </value>
+                                                <value name="VALUE-3">
+                                                  <block type="Number">
+                                                    <field name="NUM">-1</field>
+                                                  </block>
+                                                </value>
+                                                <statement name="DO">
+                                                  <block type="Wait">
                                                     <value name="VALUE-0">
-                                                      <block type="GetVariable">
-                                                        <value name="VALUE-0">
-                                                          <block type="variableReferenceBlock">
-                                                            <mutation isObjectVar="false"></mutation>
-                                                            <field name="OBJECTTYPE">Global</field>
-                                                            <field name="VAR" id="0_O(g%eBcZUSjf1bvT0v" variabletype="Global">AIDummy</field>
-                                                          </block>
-                                                        </value>
+                                                      <block type="Number">
+                                                        <field name="NUM">1</field>
                                                       </block>
                                                     </value>
-                                                    <value name="VALUE-1">
-                                                      <block type="Number">
-                                                        <field name="NUM">999</field>
+                                                  </block>
+                                                </statement>
+                                              </block>
+                                            </statement>
+                                            <next>
+                                              <block type="ruleBlock">
+                                                <mutation isOnGoingEvent="true"></mutation>
+                                                <field name="NAME">keepAIInOnePlaceIfLocked</field>
+                                                <field name="EVENTTYPE">Ongoing</field>
+                                                <field name="OBJECTTYPE">Player</field>
+                                                <statement name="CONDITIONS">
+                                                  <block type="conditionBlock">
+                                                    <value name="CONDITION">
+                                                      <block type="GetSoldierState">
+                                                        <value name="VALUE-0">
+                                                          <block type="EventPlayer"></block>
+                                                        </value>
+                                                        <value name="VALUE-1">
+                                                          <block type="SoldierStateBoolItem">
+                                                            <field name="VALUE-0">SoldierStateBool</field>
+                                                            <field name="VALUE-1">IsAlive</field>
+                                                          </block>
+                                                        </value>
                                                       </block>
                                                     </value>
                                                     <next>
-                                                      <block type="Teleport">
-                                                        <value name="VALUE-0">
-                                                          <block type="GetVariable">
-                                                            <value name="VALUE-0">
-                                                              <block type="variableReferenceBlock">
-                                                                <mutation isObjectVar="false"></mutation>
-                                                                <field name="OBJECTTYPE">Global</field>
-                                                                <field name="VAR" id="0_O(g%eBcZUSjf1bvT0v" variabletype="Global">AIDummy</field>
-                                                              </block>
-                                                            </value>
-                                                          </block>
-                                                        </value>
-                                                        <value name="VALUE-1">
-                                                          <block type="WorldPositionOf">
-                                                            <value name="VALUE-0">
-                                                              <block type="CreateVector">
-                                                                <value name="VALUE-0">
-                                                                  <block type="Number">
-                                                                    <field name="NUM">0</field>
-                                                                  </block>
-                                                                </value>
-                                                                <value name="VALUE-1">
-                                                                  <block type="Number">
-                                                                    <field name="NUM">0</field>
-                                                                  </block>
-                                                                </value>
-                                                                <value name="VALUE-2">
-                                                                  <block type="Multiply">
-                                                                    <value name="VALUE-0">
-                                                                      <block type="GetVariable">
-                                                                        <value name="VALUE-0">
-                                                                          <block type="variableReferenceBlock">
-                                                                            <mutation isObjectVar="false"></mutation>
-                                                                            <field name="OBJECTTYPE">Global</field>
-                                                                            <field name="VAR" id="m=BaVv2IC|QNo=HUn,Jm" variabletype="Global">spawnDistance</field>
-                                                                          </block>
-                                                                        </value>
-                                                                      </block>
-                                                                    </value>
-                                                                    <value name="VALUE-1">
-                                                                      <block type="Number">
-                                                                        <field name="NUM">-1</field>
-                                                                      </block>
-                                                                    </value>
-                                                                  </block>
-                                                                </value>
-                                                              </block>
-                                                            </value>
-                                                            <value name="VALUE-1">
-                                                              <block type="EventPlayer"></block>
-                                                            </value>
-                                                          </block>
-                                                        </value>
-                                                        <value name="VALUE-2">
-                                                          <block type="Number">
-                                                            <field name="NUM">0</field>
-                                                          </block>
-                                                        </value>
-                                                      </block>
-                                                    </next>
-                                                  </block>
-                                                </statement>
-                                                <next>
-                                                  <block type="ruleBlock">
-                                                    <mutation isOnGoingEvent="true"></mutation>
-                                                    <field name="NAME">displayBotHealth</field>
-                                                    <field name="EVENTTYPE">Ongoing</field>
-                                                    <field name="OBJECTTYPE">Global</field>
-                                                    <statement name="CONDITIONS">
                                                       <block type="conditionBlock">
                                                         <value name="CONDITION">
-                                                          <block type="IsType">
+                                                          <block type="GetSoldierState">
                                                             <value name="VALUE-0">
-                                                              <block type="GetVariable">
-                                                                <value name="VALUE-0">
-                                                                  <block type="variableReferenceBlock">
-                                                                    <mutation isObjectVar="false"></mutation>
-                                                                    <field name="OBJECTTYPE">Global</field>
-                                                                    <field name="VAR" id="0_O(g%eBcZUSjf1bvT0v" variabletype="Global">AIDummy</field>
-                                                                  </block>
-                                                                </value>
-                                                              </block>
+                                                              <block type="EventPlayer"></block>
                                                             </value>
                                                             <value name="VALUE-1">
-                                                              <block type="TypesItem">
-                                                                <field name="VALUE-0">Types</field>
-                                                                <field name="VALUE-1">Player</field>
+                                                              <block type="SoldierStateBoolItem">
+                                                                <field name="VALUE-0">SoldierStateBool</field>
+                                                                <field name="VALUE-1">IsAISoldier</field>
                                                               </block>
                                                             </value>
                                                           </block>
@@ -1019,13 +851,12 @@
                                                         <next>
                                                           <block type="conditionBlock">
                                                             <value name="CONDITION">
-                                                              <block type="GreaterThan">
+                                                              <block type="GetVariable">
                                                                 <value name="VALUE-0">
-                                                                  <block type="GetMatchTimeElapsed"></block>
-                                                                </value>
-                                                                <value name="VALUE-1">
-                                                                  <block type="Number">
-                                                                    <field name="NUM">0</field>
+                                                                  <block type="variableReferenceBlock">
+                                                                    <mutation isObjectVar="false"></mutation>
+                                                                    <field name="OBJECTTYPE">Global</field>
+                                                                    <field name="VAR" id="X1DTV8A%D1ioO4yF+5is" variabletype="Global">lockAI</field>
                                                                   </block>
                                                                 </value>
                                                               </block>
@@ -1033,19 +864,36 @@
                                                           </block>
                                                         </next>
                                                       </block>
-                                                    </statement>
-                                                    <statement name="ACTIONS">
-                                                      <block type="subroutineInstanceBlock">
-                                                        <field name="SUBROUTINE_NAME">displayBotHealth</field>
-                                                      </block>
-                                                    </statement>
-                                                    <next>
-                                                      <block type="ruleBlock">
-                                                        <mutation isOnGoingEvent="true"></mutation>
-                                                        <field name="NAME">displayBotDistance</field>
-                                                        <field name="EVENTTYPE">Ongoing</field>
-                                                        <field name="OBJECTTYPE">Player</field>
-                                                        <statement name="CONDITIONS">
+                                                    </next>
+                                                  </block>
+                                                </statement>
+                                                <statement name="ACTIONS">
+                                                  <block type="subroutineInstanceBlock">
+                                                    <field name="SUBROUTINE_NAME">lockBotInPlace</field>
+                                                  </block>
+                                                </statement>
+                                                <next>
+                                                  <block type="ruleBlock">
+                                                    <mutation isOnGoingEvent="true"></mutation>
+                                                    <field name="NAME">moveBotOnInterect</field>
+                                                    <field name="EVENTTYPE">Ongoing</field>
+                                                    <field name="OBJECTTYPE">Player</field>
+                                                    <statement name="CONDITIONS">
+                                                      <block type="conditionBlock">
+                                                        <value name="CONDITION">
+                                                          <block type="GetSoldierState">
+                                                            <value name="VALUE-0">
+                                                              <block type="EventPlayer"></block>
+                                                            </value>
+                                                            <value name="VALUE-1">
+                                                              <block type="SoldierStateBoolItem">
+                                                                <field name="VALUE-0">SoldierStateBool</field>
+                                                                <field name="VALUE-1">IsAlive</field>
+                                                              </block>
+                                                            </value>
+                                                          </block>
+                                                        </value>
+                                                        <next>
                                                           <block type="conditionBlock">
                                                             <value name="CONDITION">
                                                               <block type="GetSoldierState">
@@ -1055,7 +903,7 @@
                                                                 <value name="VALUE-1">
                                                                   <block type="SoldierStateBoolItem">
                                                                     <field name="VALUE-0">SoldierStateBool</field>
-                                                                    <field name="VALUE-1">IsAlive</field>
+                                                                    <field name="VALUE-1">IsInteracting</field>
                                                                   </block>
                                                                 </value>
                                                               </block>
@@ -1082,37 +930,159 @@
                                                               </block>
                                                             </next>
                                                           </block>
+                                                        </next>
+                                                      </block>
+                                                    </statement>
+                                                    <statement name="ACTIONS">
+                                                      <block type="SetHeal">
+                                                        <value name="VALUE-0">
+                                                          <block type="GetVariable">
+                                                            <value name="VALUE-0">
+                                                              <block type="variableReferenceBlock">
+                                                                <mutation isObjectVar="false"></mutation>
+                                                                <field name="OBJECTTYPE">Global</field>
+                                                                <field name="VAR" id="0_O(g%eBcZUSjf1bvT0v" variabletype="Global">AIDummy</field>
+                                                              </block>
+                                                            </value>
+                                                          </block>
+                                                        </value>
+                                                        <value name="VALUE-1">
+                                                          <block type="Number">
+                                                            <field name="NUM">999</field>
+                                                          </block>
+                                                        </value>
+                                                        <next>
+                                                          <block type="Teleport">
+                                                            <value name="VALUE-0">
+                                                              <block type="GetVariable">
+                                                                <value name="VALUE-0">
+                                                                  <block type="variableReferenceBlock">
+                                                                    <mutation isObjectVar="false"></mutation>
+                                                                    <field name="OBJECTTYPE">Global</field>
+                                                                    <field name="VAR" id="0_O(g%eBcZUSjf1bvT0v" variabletype="Global">AIDummy</field>
+                                                                  </block>
+                                                                </value>
+                                                              </block>
+                                                            </value>
+                                                            <value name="VALUE-1">
+                                                              <block type="WorldPositionOf">
+                                                                <value name="VALUE-0">
+                                                                  <block type="CreateVector">
+                                                                    <value name="VALUE-0">
+                                                                      <block type="Number">
+                                                                        <field name="NUM">0</field>
+                                                                      </block>
+                                                                    </value>
+                                                                    <value name="VALUE-1">
+                                                                      <block type="Number">
+                                                                        <field name="NUM">0</field>
+                                                                      </block>
+                                                                    </value>
+                                                                    <value name="VALUE-2">
+                                                                      <block type="Multiply">
+                                                                        <value name="VALUE-0">
+                                                                          <block type="GetVariable">
+                                                                            <value name="VALUE-0">
+                                                                              <block type="variableReferenceBlock">
+                                                                                <mutation isObjectVar="false"></mutation>
+                                                                                <field name="OBJECTTYPE">Global</field>
+                                                                                <field name="VAR" id="m=BaVv2IC|QNo=HUn,Jm" variabletype="Global">spawnDistance</field>
+                                                                              </block>
+                                                                            </value>
+                                                                          </block>
+                                                                        </value>
+                                                                        <value name="VALUE-1">
+                                                                          <block type="Number">
+                                                                            <field name="NUM">-1</field>
+                                                                          </block>
+                                                                        </value>
+                                                                      </block>
+                                                                    </value>
+                                                                  </block>
+                                                                </value>
+                                                                <value name="VALUE-1">
+                                                                  <block type="EventPlayer"></block>
+                                                                </value>
+                                                              </block>
+                                                            </value>
+                                                            <value name="VALUE-2">
+                                                              <block type="Number">
+                                                                <field name="NUM">0</field>
+                                                              </block>
+                                                            </value>
+                                                          </block>
+                                                        </next>
+                                                      </block>
+                                                    </statement>
+                                                    <next>
+                                                      <block type="ruleBlock">
+                                                        <mutation isOnGoingEvent="true"></mutation>
+                                                        <field name="NAME">displayBotHealth</field>
+                                                        <field name="EVENTTYPE">Ongoing</field>
+                                                        <field name="OBJECTTYPE">Global</field>
+                                                        <statement name="CONDITIONS">
+                                                          <block type="conditionBlock">
+                                                            <value name="CONDITION">
+                                                              <block type="IsType">
+                                                                <value name="VALUE-0">
+                                                                  <block type="GetVariable">
+                                                                    <value name="VALUE-0">
+                                                                      <block type="variableReferenceBlock">
+                                                                        <mutation isObjectVar="false"></mutation>
+                                                                        <field name="OBJECTTYPE">Global</field>
+                                                                        <field name="VAR" id="0_O(g%eBcZUSjf1bvT0v" variabletype="Global">AIDummy</field>
+                                                                      </block>
+                                                                    </value>
+                                                                  </block>
+                                                                </value>
+                                                                <value name="VALUE-1">
+                                                                  <block type="TypesItem">
+                                                                    <field name="VALUE-0">Types</field>
+                                                                    <field name="VALUE-1">Player</field>
+                                                                  </block>
+                                                                </value>
+                                                              </block>
+                                                            </value>
+                                                            <next>
+                                                              <block type="conditionBlock">
+                                                                <value name="CONDITION">
+                                                                  <block type="GreaterThan">
+                                                                    <value name="VALUE-0">
+                                                                      <block type="GetMatchTimeElapsed"></block>
+                                                                    </value>
+                                                                    <value name="VALUE-1">
+                                                                      <block type="Number">
+                                                                        <field name="NUM">0</field>
+                                                                      </block>
+                                                                    </value>
+                                                                  </block>
+                                                                </value>
+                                                              </block>
+                                                            </next>
+                                                          </block>
                                                         </statement>
                                                         <statement name="ACTIONS">
                                                           <block type="subroutineInstanceBlock">
-                                                            <field name="SUBROUTINE_NAME">displayBotDistance</field>
+                                                            <field name="SUBROUTINE_NAME">displayBotHealth</field>
                                                           </block>
                                                         </statement>
                                                         <next>
                                                           <block type="ruleBlock">
                                                             <mutation isOnGoingEvent="true"></mutation>
-                                                            <field name="NAME">keepOldHealthMeasured</field>
+                                                            <field name="NAME">displayBotDistance</field>
                                                             <field name="EVENTTYPE">Ongoing</field>
-                                                            <field name="OBJECTTYPE">Global</field>
+                                                            <field name="OBJECTTYPE">Player</field>
                                                             <statement name="CONDITIONS">
                                                               <block type="conditionBlock">
                                                                 <value name="CONDITION">
-                                                                  <block type="IsType">
+                                                                  <block type="GetSoldierState">
                                                                     <value name="VALUE-0">
-                                                                      <block type="GetVariable">
-                                                                        <value name="VALUE-0">
-                                                                          <block type="variableReferenceBlock">
-                                                                            <mutation isObjectVar="false"></mutation>
-                                                                            <field name="OBJECTTYPE">Global</field>
-                                                                            <field name="VAR" id="0_O(g%eBcZUSjf1bvT0v" variabletype="Global">AIDummy</field>
-                                                                          </block>
-                                                                        </value>
-                                                                      </block>
+                                                                      <block type="EventPlayer"></block>
                                                                     </value>
                                                                     <value name="VALUE-1">
-                                                                      <block type="TypesItem">
-                                                                        <field name="VALUE-0">Types</field>
-                                                                        <field name="VALUE-1">Player</field>
+                                                                      <block type="SoldierStateBoolItem">
+                                                                        <field name="VALUE-0">SoldierStateBool</field>
+                                                                        <field name="VALUE-1">IsAlive</field>
                                                                       </block>
                                                                     </value>
                                                                   </block>
@@ -1120,7 +1090,41 @@
                                                                 <next>
                                                                   <block type="conditionBlock">
                                                                     <value name="CONDITION">
-                                                                      <block type="GetSoldierState">
+                                                                      <block type="Not">
+                                                                        <value name="VALUE-0">
+                                                                          <block type="GetSoldierState">
+                                                                            <value name="VALUE-0">
+                                                                              <block type="EventPlayer"></block>
+                                                                            </value>
+                                                                            <value name="VALUE-1">
+                                                                              <block type="SoldierStateBoolItem">
+                                                                                <field name="VALUE-0">SoldierStateBool</field>
+                                                                                <field name="VALUE-1">IsAISoldier</field>
+                                                                              </block>
+                                                                            </value>
+                                                                          </block>
+                                                                        </value>
+                                                                      </block>
+                                                                    </value>
+                                                                  </block>
+                                                                </next>
+                                                              </block>
+                                                            </statement>
+                                                            <statement name="ACTIONS">
+                                                              <block type="subroutineInstanceBlock">
+                                                                <field name="SUBROUTINE_NAME">displayBotDistance</field>
+                                                              </block>
+                                                            </statement>
+                                                            <next>
+                                                              <block type="ruleBlock">
+                                                                <mutation isOnGoingEvent="true"></mutation>
+                                                                <field name="NAME">keepOldHealthMeasured</field>
+                                                                <field name="EVENTTYPE">Ongoing</field>
+                                                                <field name="OBJECTTYPE">Global</field>
+                                                                <statement name="CONDITIONS">
+                                                                  <block type="conditionBlock">
+                                                                    <value name="CONDITION">
+                                                                      <block type="IsType">
                                                                         <value name="VALUE-0">
                                                                           <block type="GetVariable">
                                                                             <value name="VALUE-0">
@@ -1133,22 +1137,47 @@
                                                                           </block>
                                                                         </value>
                                                                         <value name="VALUE-1">
-                                                                          <block type="SoldierStateBoolItem">
-                                                                            <field name="VALUE-0">SoldierStateBool</field>
-                                                                            <field name="VALUE-1">IsAlive</field>
+                                                                          <block type="TypesItem">
+                                                                            <field name="VALUE-0">Types</field>
+                                                                            <field name="VALUE-1">Player</field>
                                                                           </block>
                                                                         </value>
                                                                       </block>
                                                                     </value>
+                                                                    <next>
+                                                                      <block type="conditionBlock">
+                                                                        <value name="CONDITION">
+                                                                          <block type="GetSoldierState">
+                                                                            <value name="VALUE-0">
+                                                                              <block type="GetVariable">
+                                                                                <value name="VALUE-0">
+                                                                                  <block type="variableReferenceBlock">
+                                                                                    <mutation isObjectVar="false"></mutation>
+                                                                                    <field name="OBJECTTYPE">Global</field>
+                                                                                    <field name="VAR" id="0_O(g%eBcZUSjf1bvT0v" variabletype="Global">AIDummy</field>
+                                                                                  </block>
+                                                                                </value>
+                                                                              </block>
+                                                                            </value>
+                                                                            <value name="VALUE-1">
+                                                                              <block type="SoldierStateBoolItem">
+                                                                                <field name="VALUE-0">SoldierStateBool</field>
+                                                                                <field name="VALUE-1">IsAlive</field>
+                                                                              </block>
+                                                                            </value>
+                                                                          </block>
+                                                                        </value>
+                                                                      </block>
+                                                                    </next>
                                                                   </block>
-                                                                </next>
+                                                                </statement>
+                                                                <statement name="ACTIONS">
+                                                                  <block type="subroutineInstanceBlock">
+                                                                    <field name="SUBROUTINE_NAME">trackOldHealth</field>
+                                                                  </block>
+                                                                </statement>
                                                               </block>
-                                                            </statement>
-                                                            <statement name="ACTIONS">
-                                                              <block type="subroutineInstanceBlock">
-                                                                <field name="SUBROUTINE_NAME">trackOldHealth</field>
-                                                              </block>
-                                                            </statement>
+                                                            </next>
                                                           </block>
                                                         </next>
                                                       </block>
@@ -1740,98 +1769,7 @@
       </block>
     </statement>
   </block>
-  <block type="subroutineBlock" deletable="false" x="-1444" y="2285">
-    <field name="SUBROUTINE_NAME">lockBotInPlace</field>
-    <statement name="ACTIONS">
-      <block type="SetVariable">
-        <value name="VALUE-0">
-          <block type="variableReferenceBlock">
-            <mutation isObjectVar="false"></mutation>
-            <field name="OBJECTTYPE">Global</field>
-            <field name="VAR" id="bqxW?LkY[ysrEw{$:C}5" variabletype="Global">lockLocation</field>
-          </block>
-        </value>
-        <value name="VALUE-1">
-          <block type="GetSoldierState">
-            <value name="VALUE-0">
-              <block type="EventPlayer"></block>
-            </value>
-            <value name="VALUE-1">
-              <block type="SoldierStateVectorItem">
-                <field name="VALUE-0">SoldierStateVector</field>
-                <field name="VALUE-1">GetPosition</field>
-              </block>
-            </value>
-          </block>
-        </value>
-        <next>
-          <block type="While">
-            <value name="VALUE-0">
-              <block type="And">
-                <value name="VALUE-0">
-                  <block type="GetVariable">
-                    <value name="VALUE-0">
-                      <block type="variableReferenceBlock">
-                        <mutation isObjectVar="false"></mutation>
-                        <field name="OBJECTTYPE">Global</field>
-                        <field name="VAR" id="X1DTV8A%D1ioO4yF+5is" variabletype="Global">lockAI</field>
-                      </block>
-                    </value>
-                  </block>
-                </value>
-                <value name="VALUE-1">
-                  <block type="GetSoldierState">
-                    <value name="VALUE-0">
-                      <block type="EventPlayer"></block>
-                    </value>
-                    <value name="VALUE-1">
-                      <block type="SoldierStateBoolItem">
-                        <field name="VALUE-0">SoldierStateBool</field>
-                        <field name="VALUE-1">IsAlive</field>
-                      </block>
-                    </value>
-                  </block>
-                </value>
-              </block>
-            </value>
-            <statement name="DO">
-              <block type="Teleport">
-                <value name="VALUE-0">
-                  <block type="EventPlayer"></block>
-                </value>
-                <value name="VALUE-1">
-                  <block type="GetVariable">
-                    <value name="VALUE-0">
-                      <block type="variableReferenceBlock">
-                        <mutation isObjectVar="false"></mutation>
-                        <field name="OBJECTTYPE">Global</field>
-                        <field name="VAR" id="bqxW?LkY[ysrEw{$:C}5" variabletype="Global">lockLocation</field>
-                      </block>
-                    </value>
-                  </block>
-                </value>
-                <value name="VALUE-2">
-                  <block type="Number">
-                    <field name="NUM">0</field>
-                  </block>
-                </value>
-                <next>
-                  <block type="Wait">
-                    <value name="VALUE-0">
-                      <block type="Number">
-                        <field name="NUM">0.001</field>
-                      </block>
-                    </value>
-                  </block>
-                </next>
-              </block>
-            </statement>
-          </block>
-        </next>
-      </block>
-    </statement>
-  </block>
-  <block type="subroutineBlock" deletable="false" x="-1442" y="2774">
+  <block type="subroutineBlock" deletable="false" x="-1438" y="1900">
     <field name="SUBROUTINE_NAME">trackOldHealth</field>
     <statement name="ACTIONS">
       <block type="While">
@@ -2067,6 +2005,222 @@
             </next>
           </block>
         </statement>
+      </block>
+    </statement>
+  </block>
+  <block type="subroutineBlock" deletable="false" x="-1434" y="2648">
+    <field name="SUBROUTINE_NAME">moveToPlayer</field>
+    <statement name="ACTIONS">
+      <block type="If">
+        <value name="VALUE-0">
+          <block type="IsType">
+            <value name="VALUE-0">
+              <block type="GetVariable">
+                <value name="VALUE-0">
+                  <block type="variableReferenceBlock">
+                    <mutation isObjectVar="false"></mutation>
+                    <field name="OBJECTTYPE">Global</field>
+                    <field name="VAR" id="d?U`n}qKFuiMEOh:pF$K" variabletype="Global">humanPlayer</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <value name="VALUE-1">
+              <block type="TypesItem">
+                <field name="VALUE-0">Types</field>
+                <field name="VALUE-1">Player</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <statement name="DO">
+          <block type="If">
+            <value name="VALUE-0">
+              <block type="GetSoldierState">
+                <value name="VALUE-0">
+                  <block type="GetVariable">
+                    <value name="VALUE-0">
+                      <block type="variableReferenceBlock">
+                        <mutation isObjectVar="false"></mutation>
+                        <field name="OBJECTTYPE">Global</field>
+                        <field name="VAR" id="d?U`n}qKFuiMEOh:pF$K" variabletype="Global">humanPlayer</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <value name="VALUE-1">
+                  <block type="SoldierStateBoolItem">
+                    <field name="VALUE-0">SoldierStateBool</field>
+                    <field name="VALUE-1">IsAlive</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <statement name="DO">
+              <block type="Teleport">
+                <value name="VALUE-0">
+                  <block type="EventPlayer"></block>
+                </value>
+                <value name="VALUE-1">
+                  <block type="WorldPositionOf">
+                    <value name="VALUE-0">
+                      <block type="CreateVector">
+                        <value name="VALUE-0">
+                          <block type="GetVariable">
+                            <value name="VALUE-0">
+                              <block type="variableReferenceBlock">
+                                <mutation isObjectVar="false"></mutation>
+                                <field name="OBJECTTYPE">Global</field>
+                                <field name="VAR" id="m=BaVv2IC|QNo=HUn,Jm" variabletype="Global">spawnDistance</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <value name="VALUE-1">
+                          <block type="Number">
+                            <field name="NUM">0</field>
+                          </block>
+                        </value>
+                        <value name="VALUE-2">
+                          <block type="Number">
+                            <field name="NUM">0</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <value name="VALUE-1">
+                      <block type="GetVariable">
+                        <value name="VALUE-0">
+                          <block type="variableReferenceBlock">
+                            <mutation isObjectVar="false"></mutation>
+                            <field name="OBJECTTYPE">Global</field>
+                            <field name="VAR" id="d?U`n}qKFuiMEOh:pF$K" variabletype="Global">humanPlayer</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <value name="VALUE-2">
+                  <block type="Number">
+                    <field name="NUM">0</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="If">
+                    <value name="VALUE-0">
+                      <block type="GetVariable">
+                        <value name="VALUE-0">
+                          <block type="variableReferenceBlock">
+                            <mutation isObjectVar="false"></mutation>
+                            <field name="OBJECTTYPE">Global</field>
+                            <field name="VAR" id="X1DTV8A%D1ioO4yF+5is" variabletype="Global">lockAI</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <statement name="DO">
+                      <block type="subroutineInstanceBlock">
+                        <field name="SUBROUTINE_NAME">lockBotInPlace</field>
+                      </block>
+                    </statement>
+                  </block>
+                </next>
+              </block>
+            </statement>
+          </block>
+        </statement>
+      </block>
+    </statement>
+  </block>
+  <block type="subroutineBlock" deletable="false" x="-1460" y="3327">
+    <field name="SUBROUTINE_NAME">lockBotInPlace</field>
+    <statement name="ACTIONS">
+      <block type="SetVariable">
+        <value name="VALUE-0">
+          <block type="variableReferenceBlock">
+            <mutation isObjectVar="false"></mutation>
+            <field name="OBJECTTYPE">Global</field>
+            <field name="VAR" id="bqxW?LkY[ysrEw{$:C}5" variabletype="Global">lockLocation</field>
+          </block>
+        </value>
+        <value name="VALUE-1">
+          <block type="GetSoldierState">
+            <value name="VALUE-0">
+              <block type="EventPlayer"></block>
+            </value>
+            <value name="VALUE-1">
+              <block type="SoldierStateVectorItem">
+                <field name="VALUE-0">SoldierStateVector</field>
+                <field name="VALUE-1">GetPosition</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <next>
+          <block type="While">
+            <value name="VALUE-0">
+              <block type="And">
+                <value name="VALUE-0">
+                  <block type="GetVariable">
+                    <value name="VALUE-0">
+                      <block type="variableReferenceBlock">
+                        <mutation isObjectVar="false"></mutation>
+                        <field name="OBJECTTYPE">Global</field>
+                        <field name="VAR" id="X1DTV8A%D1ioO4yF+5is" variabletype="Global">lockAI</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <value name="VALUE-1">
+                  <block type="GetSoldierState">
+                    <value name="VALUE-0">
+                      <block type="EventPlayer"></block>
+                    </value>
+                    <value name="VALUE-1">
+                      <block type="SoldierStateBoolItem">
+                        <field name="VALUE-0">SoldierStateBool</field>
+                        <field name="VALUE-1">IsAlive</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <statement name="DO">
+              <block type="Teleport">
+                <value name="VALUE-0">
+                  <block type="EventPlayer"></block>
+                </value>
+                <value name="VALUE-1">
+                  <block type="GetVariable">
+                    <value name="VALUE-0">
+                      <block type="variableReferenceBlock">
+                        <mutation isObjectVar="false"></mutation>
+                        <field name="OBJECTTYPE">Global</field>
+                        <field name="VAR" id="bqxW?LkY[ysrEw{$:C}5" variabletype="Global">lockLocation</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <value name="VALUE-2">
+                  <block type="Number">
+                    <field name="NUM">0</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="Wait">
+                    <value name="VALUE-0">
+                      <block type="Number">
+                        <field name="NUM">0.001</field>
+                      </block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </statement>
+          </block>
+        </next>
       </block>
     </statement>
   </block>
