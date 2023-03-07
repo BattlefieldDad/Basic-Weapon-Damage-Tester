@@ -2066,14 +2066,8 @@
                     <value name="VALUE-0">
                       <block type="CreateVector">
                         <value name="VALUE-0">
-                          <block type="GetVariable">
-                            <value name="VALUE-0">
-                              <block type="variableReferenceBlock">
-                                <mutation isObjectVar="false"></mutation>
-                                <field name="OBJECTTYPE">Global</field>
-                                <field name="VAR" id="m=BaVv2IC|QNo=HUn,Jm" variabletype="Global">spawnDistance</field>
-                              </block>
-                            </value>
+                          <block type="Number">
+                            <field name="NUM">0</field>
                           </block>
                         </value>
                         <value name="VALUE-1">
@@ -2082,8 +2076,14 @@
                           </block>
                         </value>
                         <value name="VALUE-2">
-                          <block type="Number">
-                            <field name="NUM">0</field>
+                          <block type="GetVariable">
+                            <value name="VALUE-0">
+                              <block type="variableReferenceBlock">
+                                <mutation isObjectVar="false"></mutation>
+                                <field name="OBJECTTYPE">Global</field>
+                                <field name="VAR" id="m=BaVv2IC|QNo=HUn,Jm" variabletype="Global">spawnDistance</field>
+                              </block>
+                            </value>
                           </block>
                         </value>
                       </block>
