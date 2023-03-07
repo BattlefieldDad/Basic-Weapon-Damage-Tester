@@ -1072,7 +1072,7 @@
                                                             <statement name="CONDITIONS">
                                                               <block type="conditionBlock">
                                                                 <value name="CONDITION">
-                                                                  <block type="GetSoldierState">
+                                                                  <block type="IsType">
                                                                     <value name="VALUE-0">
                                                                       <block type="GetVariable">
                                                                         <value name="VALUE-0">
@@ -1085,13 +1085,38 @@
                                                                       </block>
                                                                     </value>
                                                                     <value name="VALUE-1">
-                                                                      <block type="SoldierStateBoolItem">
-                                                                        <field name="VALUE-0">SoldierStateBool</field>
-                                                                        <field name="VALUE-1">IsAlive</field>
+                                                                      <block type="TypesItem">
+                                                                        <field name="VALUE-0">Types</field>
+                                                                        <field name="VALUE-1">Player</field>
                                                                       </block>
                                                                     </value>
                                                                   </block>
                                                                 </value>
+                                                                <next>
+                                                                  <block type="conditionBlock">
+                                                                    <value name="CONDITION">
+                                                                      <block type="GetSoldierState">
+                                                                        <value name="VALUE-0">
+                                                                          <block type="GetVariable">
+                                                                            <value name="VALUE-0">
+                                                                              <block type="variableReferenceBlock">
+                                                                                <mutation isObjectVar="false"></mutation>
+                                                                                <field name="OBJECTTYPE">Global</field>
+                                                                                <field name="VAR" id="0_O(g%eBcZUSjf1bvT0v" variabletype="Global">AIDummy</field>
+                                                                              </block>
+                                                                            </value>
+                                                                          </block>
+                                                                        </value>
+                                                                        <value name="VALUE-1">
+                                                                          <block type="SoldierStateBoolItem">
+                                                                            <field name="VALUE-0">SoldierStateBool</field>
+                                                                            <field name="VALUE-1">IsAlive</field>
+                                                                          </block>
+                                                                        </value>
+                                                                      </block>
+                                                                    </value>
+                                                                  </block>
+                                                                </next>
                                                               </block>
                                                             </statement>
                                                             <statement name="ACTIONS">
@@ -2059,30 +2084,6 @@
                             </value>
                           </block>
                         </value>
-                        <next>
-                          <block type="ShowHighlightedGameModeMessage">
-                            <value name="VALUE-0">
-                              <block type="Message">
-                                <value name="VALUE-0">
-                                  <block type="Text">
-                                    <field name="TEXT">HIT DAMAGE {}</field>
-                                  </block>
-                                </value>
-                                <value name="VALUE-1">
-                                  <block type="GetVariable">
-                                    <value name="VALUE-0">
-                                      <block type="variableReferenceBlock">
-                                        <mutation isObjectVar="false"></mutation>
-                                        <field name="OBJECTTYPE">Global</field>
-                                        <field name="VAR" id="a5xD-pT+?ByjCH4^bWC]" variabletype="Global">shotDamage</field>
-                                      </block>
-                                    </value>
-                                  </block>
-                                </value>
-                              </block>
-                            </value>
-                          </block>
-                        </next>
                       </block>
                     </next>
                   </block>
