@@ -996,17 +996,42 @@
                                                     <statement name="CONDITIONS">
                                                       <block type="conditionBlock">
                                                         <value name="CONDITION">
-                                                          <block type="GreaterThan">
+                                                          <block type="IsType">
                                                             <value name="VALUE-0">
-                                                              <block type="GetMatchTimeElapsed"></block>
+                                                              <block type="GetVariable">
+                                                                <value name="VALUE-0">
+                                                                  <block type="variableReferenceBlock">
+                                                                    <mutation isObjectVar="false"></mutation>
+                                                                    <field name="OBJECTTYPE">Global</field>
+                                                                    <field name="VAR" id="0_O(g%eBcZUSjf1bvT0v" variabletype="Global">AIDummy</field>
+                                                                  </block>
+                                                                </value>
+                                                              </block>
                                                             </value>
                                                             <value name="VALUE-1">
-                                                              <block type="Number">
-                                                                <field name="NUM">0</field>
+                                                              <block type="TypesItem">
+                                                                <field name="VALUE-0">Types</field>
+                                                                <field name="VALUE-1">Player</field>
                                                               </block>
                                                             </value>
                                                           </block>
                                                         </value>
+                                                        <next>
+                                                          <block type="conditionBlock">
+                                                            <value name="CONDITION">
+                                                              <block type="GreaterThan">
+                                                                <value name="VALUE-0">
+                                                                  <block type="GetMatchTimeElapsed"></block>
+                                                                </value>
+                                                                <value name="VALUE-1">
+                                                                  <block type="Number">
+                                                                    <field name="NUM">0</field>
+                                                                  </block>
+                                                                </value>
+                                                              </block>
+                                                            </value>
+                                                          </block>
+                                                        </next>
                                                       </block>
                                                     </statement>
                                                     <statement name="ACTIONS">
