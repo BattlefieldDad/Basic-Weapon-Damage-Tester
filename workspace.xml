@@ -376,13 +376,13 @@
                             <value name="VALUE-1">
                               <block type="SoldierStateBoolItem">
                                 <field name="VALUE-0">SoldierStateBool</field>
-                                <field name="VALUE-1">IsCrouching</field>
+                                <field name="VALUE-1">IsAlive</field>
                               </block>
                             </value>
                           </block>
                         </value>
                         <value name="VALUE-1">
-                          <block type="Not">
+                          <block type="And">
                             <value name="VALUE-0">
                               <block type="GetSoldierState">
                                 <value name="VALUE-0">
@@ -391,7 +391,24 @@
                                 <value name="VALUE-1">
                                   <block type="SoldierStateBoolItem">
                                     <field name="VALUE-0">SoldierStateBool</field>
-                                    <field name="VALUE-1">IsAISoldier</field>
+                                    <field name="VALUE-1">IsCrouching</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <value name="VALUE-1">
+                              <block type="Not">
+                                <value name="VALUE-0">
+                                  <block type="GetSoldierState">
+                                    <value name="VALUE-0">
+                                      <block type="EventPlayer"></block>
+                                    </value>
+                                    <value name="VALUE-1">
+                                      <block type="SoldierStateBoolItem">
+                                        <field name="VALUE-0">SoldierStateBool</field>
+                                        <field name="VALUE-1">IsAISoldier</field>
+                                      </block>
+                                    </value>
                                   </block>
                                 </value>
                               </block>
@@ -445,21 +462,14 @@
                             <value name="CONDITION">
                               <block type="And">
                                 <value name="VALUE-0">
-                                  <block type="GreaterThan">
+                                  <block type="GetSoldierState">
                                     <value name="VALUE-0">
-                                      <block type="GetVariable">
-                                        <value name="VALUE-0">
-                                          <block type="variableReferenceBlock">
-                                            <mutation isObjectVar="false"></mutation>
-                                            <field name="OBJECTTYPE">Global</field>
-                                            <field name="VAR" id="S@W76l(0,C0~#.n#Ss[+" variabletype="Global">lockCounter</field>
-                                          </block>
-                                        </value>
-                                      </block>
+                                      <block type="EventPlayer"></block>
                                     </value>
                                     <value name="VALUE-1">
-                                      <block type="Number">
-                                        <field name="NUM">0</field>
+                                      <block type="SoldierStateBoolItem">
+                                        <field name="VALUE-0">SoldierStateBool</field>
+                                        <field name="VALUE-1">IsAlive</field>
                                       </block>
                                     </value>
                                   </block>
@@ -467,20 +477,27 @@
                                 <value name="VALUE-1">
                                   <block type="And">
                                     <value name="VALUE-0">
-                                      <block type="GetSoldierState">
+                                      <block type="GreaterThan">
                                         <value name="VALUE-0">
-                                          <block type="EventPlayer"></block>
+                                          <block type="GetVariable">
+                                            <value name="VALUE-0">
+                                              <block type="variableReferenceBlock">
+                                                <mutation isObjectVar="false"></mutation>
+                                                <field name="OBJECTTYPE">Global</field>
+                                                <field name="VAR" id="S@W76l(0,C0~#.n#Ss[+" variabletype="Global">lockCounter</field>
+                                              </block>
+                                            </value>
+                                          </block>
                                         </value>
                                         <value name="VALUE-1">
-                                          <block type="SoldierStateBoolItem">
-                                            <field name="VALUE-0">SoldierStateBool</field>
-                                            <field name="VALUE-1">IsInteracting</field>
+                                          <block type="Number">
+                                            <field name="NUM">0</field>
                                           </block>
                                         </value>
                                       </block>
                                     </value>
                                     <value name="VALUE-1">
-                                      <block type="Not">
+                                      <block type="And">
                                         <value name="VALUE-0">
                                           <block type="GetSoldierState">
                                             <value name="VALUE-0">
@@ -489,7 +506,24 @@
                                             <value name="VALUE-1">
                                               <block type="SoldierStateBoolItem">
                                                 <field name="VALUE-0">SoldierStateBool</field>
-                                                <field name="VALUE-1">IsAISoldier</field>
+                                                <field name="VALUE-1">IsInteracting</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                        <value name="VALUE-1">
+                                          <block type="Not">
+                                            <value name="VALUE-0">
+                                              <block type="GetSoldierState">
+                                                <value name="VALUE-0">
+                                                  <block type="EventPlayer"></block>
+                                                </value>
+                                                <value name="VALUE-1">
+                                                  <block type="SoldierStateBoolItem">
+                                                    <field name="VALUE-0">SoldierStateBool</field>
+                                                    <field name="VALUE-1">IsAISoldier</field>
+                                                  </block>
+                                                </value>
                                               </block>
                                             </value>
                                           </block>
@@ -642,21 +676,14 @@
                                             <value name="CONDITION">
                                               <block type="And">
                                                 <value name="VALUE-0">
-                                                  <block type="Equals">
+                                                  <block type="GetSoldierState">
                                                     <value name="VALUE-0">
-                                                      <block type="GetVariable">
-                                                        <value name="VALUE-0">
-                                                          <block type="variableReferenceBlock">
-                                                            <mutation isObjectVar="false"></mutation>
-                                                            <field name="OBJECTTYPE">Global</field>
-                                                            <field name="VAR" id="S@W76l(0,C0~#.n#Ss[+" variabletype="Global">lockCounter</field>
-                                                          </block>
-                                                        </value>
-                                                      </block>
+                                                      <block type="EventPlayer"></block>
                                                     </value>
                                                     <value name="VALUE-1">
-                                                      <block type="Number">
-                                                        <field name="NUM">0</field>
+                                                      <block type="SoldierStateBoolItem">
+                                                        <field name="VALUE-0">SoldierStateBool</field>
+                                                        <field name="VALUE-1">IsAlive</field>
                                                       </block>
                                                     </value>
                                                   </block>
@@ -664,20 +691,27 @@
                                                 <value name="VALUE-1">
                                                   <block type="And">
                                                     <value name="VALUE-0">
-                                                      <block type="GetSoldierState">
+                                                      <block type="Equals">
                                                         <value name="VALUE-0">
-                                                          <block type="EventPlayer"></block>
+                                                          <block type="GetVariable">
+                                                            <value name="VALUE-0">
+                                                              <block type="variableReferenceBlock">
+                                                                <mutation isObjectVar="false"></mutation>
+                                                                <field name="OBJECTTYPE">Global</field>
+                                                                <field name="VAR" id="S@W76l(0,C0~#.n#Ss[+" variabletype="Global">lockCounter</field>
+                                                              </block>
+                                                            </value>
+                                                          </block>
                                                         </value>
                                                         <value name="VALUE-1">
-                                                          <block type="SoldierStateBoolItem">
-                                                            <field name="VALUE-0">SoldierStateBool</field>
-                                                            <field name="VALUE-1">IsInteracting</field>
+                                                          <block type="Number">
+                                                            <field name="NUM">0</field>
                                                           </block>
                                                         </value>
                                                       </block>
                                                     </value>
                                                     <value name="VALUE-1">
-                                                      <block type="Not">
+                                                      <block type="And">
                                                         <value name="VALUE-0">
                                                           <block type="GetSoldierState">
                                                             <value name="VALUE-0">
@@ -686,7 +720,24 @@
                                                             <value name="VALUE-1">
                                                               <block type="SoldierStateBoolItem">
                                                                 <field name="VALUE-0">SoldierStateBool</field>
-                                                                <field name="VALUE-1">IsAISoldier</field>
+                                                                <field name="VALUE-1">IsInteracting</field>
+                                                              </block>
+                                                            </value>
+                                                          </block>
+                                                        </value>
+                                                        <value name="VALUE-1">
+                                                          <block type="Not">
+                                                            <value name="VALUE-0">
+                                                              <block type="GetSoldierState">
+                                                                <value name="VALUE-0">
+                                                                  <block type="EventPlayer"></block>
+                                                                </value>
+                                                                <value name="VALUE-1">
+                                                                  <block type="SoldierStateBoolItem">
+                                                                    <field name="VALUE-0">SoldierStateBool</field>
+                                                                    <field name="VALUE-1">IsAISoldier</field>
+                                                                  </block>
+                                                                </value>
                                                               </block>
                                                             </value>
                                                           </block>
@@ -812,13 +863,13 @@
                                                             <value name="VALUE-1">
                                                               <block type="SoldierStateBoolItem">
                                                                 <field name="VALUE-0">SoldierStateBool</field>
-                                                                <field name="VALUE-1">IsInteracting</field>
+                                                                <field name="VALUE-1">IsAlive</field>
                                                               </block>
                                                             </value>
                                                           </block>
                                                         </value>
                                                         <value name="VALUE-1">
-                                                          <block type="Not">
+                                                          <block type="And">
                                                             <value name="VALUE-0">
                                                               <block type="GetSoldierState">
                                                                 <value name="VALUE-0">
@@ -827,7 +878,24 @@
                                                                 <value name="VALUE-1">
                                                                   <block type="SoldierStateBoolItem">
                                                                     <field name="VALUE-0">SoldierStateBool</field>
-                                                                    <field name="VALUE-1">IsAISoldier</field>
+                                                                    <field name="VALUE-1">IsInteracting</field>
+                                                                  </block>
+                                                                </value>
+                                                              </block>
+                                                            </value>
+                                                            <value name="VALUE-1">
+                                                              <block type="Not">
+                                                                <value name="VALUE-0">
+                                                                  <block type="GetSoldierState">
+                                                                    <value name="VALUE-0">
+                                                                      <block type="EventPlayer"></block>
+                                                                    </value>
+                                                                    <value name="VALUE-1">
+                                                                      <block type="SoldierStateBoolItem">
+                                                                        <field name="VALUE-0">SoldierStateBool</field>
+                                                                        <field name="VALUE-1">IsAISoldier</field>
+                                                                      </block>
+                                                                    </value>
                                                                   </block>
                                                                 </value>
                                                               </block>
