@@ -367,8 +367,21 @@
                 <statement name="CONDITIONS">
                   <block type="conditionBlock">
                     <value name="CONDITION">
-                      <block type="And">
+                      <block type="GetSoldierState">
                         <value name="VALUE-0">
+                          <block type="EventPlayer"></block>
+                        </value>
+                        <value name="VALUE-1">
+                          <block type="SoldierStateBoolItem">
+                            <field name="VALUE-0">SoldierStateBool</field>
+                            <field name="VALUE-1">IsAlive</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="conditionBlock">
+                        <value name="CONDITION">
                           <block type="GetSoldierState">
                             <value name="VALUE-0">
                               <block type="EventPlayer"></block>
@@ -376,27 +389,14 @@
                             <value name="VALUE-1">
                               <block type="SoldierStateBoolItem">
                                 <field name="VALUE-0">SoldierStateBool</field>
-                                <field name="VALUE-1">IsAlive</field>
+                                <field name="VALUE-1">IsCrouching</field>
                               </block>
                             </value>
                           </block>
                         </value>
-                        <value name="VALUE-1">
-                          <block type="And">
-                            <value name="VALUE-0">
-                              <block type="GetSoldierState">
-                                <value name="VALUE-0">
-                                  <block type="EventPlayer"></block>
-                                </value>
-                                <value name="VALUE-1">
-                                  <block type="SoldierStateBoolItem">
-                                    <field name="VALUE-0">SoldierStateBool</field>
-                                    <field name="VALUE-1">IsCrouching</field>
-                                  </block>
-                                </value>
-                              </block>
-                            </value>
-                            <value name="VALUE-1">
+                        <next>
+                          <block type="conditionBlock">
+                            <value name="CONDITION">
                               <block type="Not">
                                 <value name="VALUE-0">
                                   <block type="GetSoldierState">
@@ -414,9 +414,9 @@
                               </block>
                             </value>
                           </block>
-                        </value>
+                        </next>
                       </block>
-                    </value>
+                    </next>
                   </block>
                 </statement>
                 <statement name="ACTIONS">
